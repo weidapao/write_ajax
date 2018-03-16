@@ -6,7 +6,7 @@ window.jQuery = function(nodeOrSelector){
 }
 
 window.$ = window.jQuery;
-window.jQuery.ajax=function(url,method,body,success, fail){
+window.jQuery.ajax=function({url,method,body,success, fail}){
   let request=new XMLHttpRequest();
   request.open(method,url);  //配置request
   request.onreadystatechange=()=>{
@@ -25,18 +25,18 @@ function f1(responseText){}
 function f2(responseText){}
 
 myButton.addEventListener('click', (e)=>{
-  window.jQuery.ajax(
-    '/WEIDABAO',
-    'get',
-    'helloWorld',
-    (x)=>{
+  window.jQuery.ajax({
+    url:'/WEIDABAO',
+    method:'get',
+    body:'helloWorld',
+    success:(x)=>{
       f1.call(undefined,x)
       f2.call(undefined,x)
     },
-    (x)=>{
+    fail:(x)=>{
       console.log(x)
       console.log(x.status)
       console.log(x.responseText)
     }
-  )
+  })
 })
